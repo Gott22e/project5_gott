@@ -14,6 +14,6 @@ echo "Running in directory: $PWD"
 
 # your commands here
 
---compatible-hits-norm
-cufflinks -G /project/bf528/project_2/reference/annot/mm9.gtf -b /project/bf528/project_2/reference/mm9.fa -u -o P0_1_cufflinks -p 16 P0_1_tophat/accepted_hits.bam
+cufflinks -G /project/bf528/project_2/reference/annot/mm9.gtf -b /project/bf528/project_2/reference/mm9.fa -u -o P0_1_cufflinks -p 16 P0_1_tophat/accepted_hits.bam --compatible-hits-norm
+
 echo "Job finished: $(date +%F)  $(date +%T)"
