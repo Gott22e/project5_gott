@@ -1,0 +1,19 @@
+#!/bin/bash -l
+
+#$ -P bf528
+#$ -cwd
+#$ -j y
+#$ -pe mpi_16_tasks_per_node 16
+
+module load cufflinks
+
+echo "Running job $JOB_ID"
+echo "Job started: $(date +%F)  $(date +%T)"
+echo "Running in directory: $PWD"
+
+
+# your commands here
+
+--compatible-hits-norm
+cufflinks -G /project/bf528/project_2/reference/annot/mm9.gtf -b /project/bf528/project_2/reference/mm9.fa -u -o P0_1_cufflinks -p 16 P0_1_tophat/accepted_hits.bam
+echo "Job finished: $(date +%F)  $(date +%T)"

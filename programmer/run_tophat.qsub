@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#$ -P bf528
+#$ -cwd
+#$ -j y
+#$ -pe mpi_16_tasks_per_node 16
+
+echo "Running job $JOB_ID"
+echo "Job started: $(date +%F)  $(date +%T)"
+echo "Running in directory: $PWD"
+
+#modules?
+module load python2
+module load samtools/0.1.19
+module load bowtie2
+module load boost
+module load tophat
+
+
+# Variables
+text1=/projectnb2/bf528/users/dachshund/project5_gott/data_curator/data/P0_1_1.fastq
+text2=/projectnb2/bf528/users/dachshund/project5_gott/data_curator/data/P0_1_2.fastq
+ref=/project/bf528/project_2/reference/mm9
+
+#Arguments copied from /project/bf528/project_2/scripts/tophat_args.txt
+tophat -r 200 -G /project/bf528/project_2/reference/annot/mm9.gtf --segment-length=20 --segment-mismatches=1 --no-novel-juncs -o P0_1_tophat -p 16 $ref $text1 $text2
+
+
+
+echo "Job finished: $(date +%F) $(date +%T)"

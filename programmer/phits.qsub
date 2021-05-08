@@ -1,0 +1,24 @@
+#!/bin/bash -l
+
+#$ -P bf528
+#$ -cwd
+#$ -j y
+#$ -pe omp 8
+
+#Module loading
+module load python3
+module load samtools
+module load rseqc
+
+#commands to run
+echo "GeneBody Coverage started $(date +%F) $(date +%T)"
+geneBody_coverage.py -r /project/bf528/project_2/reference/annot/mm9.bed -i P0_1_tophat/accepted_hits.bam -o hits_gB
+
+echo "GBC done; Inner Distance started $(date +%F) $(date +%T)"
+inner_distance.py -r /project/bf528/project_2/reference/annot/mm9.bed -i P0_1_tophat/accepted_hits.bam -o hits_id
+
+echo "ID done; Bam Stat started $(date +%F) $(date +%T)"
+bam_stat.py -i P0_1_tophat/accepted_hits.bam
+
+
+echo "Job finished: $(date +%F) $(date +%T)"
